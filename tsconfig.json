@@ -11,6 +11,17 @@
     "resolveJsonModule": true,
     "moduleResolution": "node"
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/index.ts",
+    "src/commands/**/*",
+    "src/config/**/*",
+    "src/handlers/**/*",
+    "src/repository/KeysRepository.ts",
+    "src/repository/supabase.ts",
+    "src/repository/TerritoryRepository.ts",
+    "src/services/**/*",
+    "src/types/**/*",
+    "src/utils/**/*"
+  ],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction } from 'discord.js';
+import { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { commands } from '../commands';
 import { isOwner } from '../utils/permissions';
 
@@ -31,5 +31,16 @@ export async function handleSlashCommand(interaction: ChatInputCommandInteractio
         } else {
             await interaction.reply({ content: errorMessage, ephemeral: true });
         }
+    }
+}
+
+export async function handleAutocomplete(interaction: AutocompleteInteraction) {
+    const command = commands.find(cmd => cmd.data.name === interaction.commandName);
+    if (!command?.autocomplete) return;
+    try {
+        await command.autocomplete(interaction);
+    } catch (error) {
+        console.error('Error handling autocomplete:', error);
+        if (!interaction.responded) await interaction.respond([]);
     }
 }
